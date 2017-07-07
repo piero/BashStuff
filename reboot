@@ -1,0 +1,11 @@
+#!/bin/bash 
+
+NoColour='\e[0m'
+Red='\e[1;31m'
+
+echo
+echo -e "${Red}This is a dummy 'reboot' command.${NoColour}"
+echo -e "I'm probably saving you from yourself."
+echo
+echo "To reboot the machine type \"/sbin/reboot\"."
+echo
