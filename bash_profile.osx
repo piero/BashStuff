@@ -1,0 +1,32 @@
+if [ -f $HOME/.bashrc ]; then
+    source $HOME/.bashrc
+fi
+
+Blue='\[\033[01;34m\]'
+Green='\[\033[01;32m\]'
+Cyan='\[\033[01;36m\]'
+NoColour='\[\033[00m\]'
+UserHost='\u@\h'
+
+# Configure PS1 for git
+gitCompletionFile=/usr/local/git/contrib/completion/git-completion.bash
+gitPromptFile=/usr/local/git/contrib/completion/git-prompt.sh
+
+if [ -f ${gitCompletionFile} ] && [ -f ${gitPromptFile} ]; then
+    source /usr/local/git/contrib/completion/git-completion.bash
+    source /usr/local/git/contrib/completion/git-prompt.sh
+    GIT_PS1_SHOWDIRTYSTATE=true
+    PS1=$Green$UserHost$NoColour':'$Blue'\w'$Cyan'$(__git_ps1)'$NoColour'\$ '
+else
+    PS1=$Green$UserHost$NoColour':'$Blue'\w'$NoColour'\$ '
+fi
+
+export PS1
+
+
+if [ -f $HOME/.bash_aliases ]; then
+    source $HOME/.bash_aliases
+fi
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+

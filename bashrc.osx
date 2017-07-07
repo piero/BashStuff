@@ -1,0 +1,16 @@
+# Use coreutils from Homebrew before the MacOS ones
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
+# Use libxml2 from Homebrew
+export PATH="/usr/local/opt/libxml2/bin:$PATH"
+
+# Use Python from Homebrew
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+
+# Use ctags from Homebrew
+export PATH="/usr/local/Cellar/ctags/5.8_1/bin:$PATH"
+
+# Load Ruby version from rbenv
+eval "$(rbenv init -)"
+
