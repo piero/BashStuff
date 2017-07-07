@@ -1,6 +1,6 @@
-alias l='/bin/ls'
-alias ll='/bin/ls -l'
-alias lla='/bin/ls -la'
+alias l='ls --color'
+alias ll="ls -l --color"
+alias lla='ls -la --color'
 
 # Git
 alias gb='git branch'
