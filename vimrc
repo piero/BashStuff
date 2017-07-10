@@ -162,6 +162,9 @@ let g:syntastic_aggregate_errors = 1
 autocmd FileType javascript let b:syntastic_checkers = findfile('.jscsrc', '.;') != '' ? ['jscs', 'jshint'] : ['eslint']
 " ---------------------------------
 
+" When editing JavaScript, set appropriate tab width
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+
 
 " Set the theme if the terminal emulator supports 256 colours
 " or if using the GUI version of Vim
