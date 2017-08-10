@@ -312,6 +312,13 @@ let g:mocha_js_command = "!mocha --recursive {spec}"
 " use goimports for formatting
 let g:go_fmt_command = "goimports"
 
+" turn highlighting on
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
 autocmd FileType go nmap <silent> <leader>gb <Plug>(go-build)
 autocmd FileType go nmap <leader>gr <Plug>(go-run)
 autocmd FileType go nmap <leader>gt <Plug>(go-test)
