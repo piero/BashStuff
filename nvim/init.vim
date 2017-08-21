@@ -94,9 +94,9 @@ set hidden
 set pastetoggle=<F2>
 
 
-" Set appropriate tab width for JavaScript and Ruby
-autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
-autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+" Set appropriate tabs for JavaScript and Ruby
+autocmd Filetype javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+autocmd Filetype ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 
 " Set the theme if the terminal emulator supports 256 colours
