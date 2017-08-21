@@ -110,6 +110,11 @@ endif
 au FileType gitcommit set tw=72
 
 
+" Folding
+set foldmethod=syntax
+set nofoldenable
+
+
 " ----------[ Key Mappings ]----------
 
 " Set the <leader> to , (comma)
@@ -295,6 +300,7 @@ let g:tagbar_type_go = {
 \ }
 
 " ------------------------------
+
 
 
 " ----------[ vim-mocha ]----------
