@@ -30,6 +30,7 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
+Plugin 'JamshedVesuna/vim-markdown-preview'
 "Plugin 'Shougo/deoplete.nvim'
 
 " JavaScript plugins
@@ -324,3 +325,8 @@ autocmd FileType go nmap <leader>gr <Plug>(go-run)
 autocmd FileType go nmap <leader>gt <Plug>(go-test)
 " ----------------------------------
 
+
+" -----[ vim-markdown-preview ]-----
+"let vim_markdown_preview_browser = 'Google Chrome'
+let vim_markdown_preview_github = 1
+" ----------------------------------
