@@ -1,3 +1,14 @@
+# vim:ft=zsh:ts=2:sw=2:sts:et:
+
+#
+# Internal Utility Functions
+#
+
+# Returns whether the given command is executable or aliased
+_has() {
+    return $( whence $1 >/dev/null )
+}
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -58,7 +69,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(docker git golang pyenv sublime thefuck web-search)
+plugins=(docker git golang pyenv sublime thefuck web-search zsh-ipfs)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,17 +102,11 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias v="vimr -n ."
+alias e="exa -lh"
+alias eg="exa -lh --git"
+alias ea="exa -lha"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# Load YouView configuration
-if [ -f $HOME/TVOS/.tvos_rc ]; then
-    source $HOME/TVOS/.tvos_rc
-fi
-
-if [ -f $HOME/.yvcloud_rc ]; then
-    source $HOME/.yvcloud_rc
-fi
 
 # Use coreutils from Homebrew before the MacOS ones
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
@@ -111,23 +116,42 @@ export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 export PATH="/usr/local/opt/libxml2/bin:$PATH"
 
 # Use Python from Homebrew
-export PATH="/usr/local/opt/sqlite/bin:$PATH"
+export PATH="/usr/local/opt/python/bin:$PATH"
 
 # Use ctags from Homebrew
 export PATH="/usr/local/Cellar/ctags/5.8_1/bin:$PATH"
+
+# Integrate FZF (fuzzy searcher) with ag
+if _has fzf && _has ag; then
+    export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_DEFAULT_OPTS='
+    --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
+    --color info:108,prompt:109,spinner:108,pointer:168,marker:168
+    '
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+fi
 
 export GOPATH=$(go env GOPATH)
 export PATH="$GOPATH:$GOPATH/bin:$PATH"
 
 export PATH="$HOME/bin:$PATH"
 
-source $HOME/TVOS/git/docker-build-environments/docker-env.sh
+# NVM (installed via HomeBrew)
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
 
 # Load Ruby version from rbenv
 eval "$(rbenv init -)"
 
-# Load Pyhtonversion from pyenv
+# Load Pythonversion from pyenv
 eval "$(pyenv init -)"
+
+# pyenv-virtualenv
+if which pyenv-virtualenv-init > /dev/null; then
+    eval "$(pyenv virtualenv-init -)"
+fi
 
 # Prevent having to escape square brackets with 'rake'
 alias rake='noglob rake'
