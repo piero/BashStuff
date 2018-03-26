@@ -2,13 +2,13 @@
 set nocompatible        " Always use viMproved
 set termguicolors       " Use true colors in the terminal
 filetype off
+set clipboard+=unnamed  " Make it possible to copy/paste in iTerm
 " ----------------------------------------------------------------
 
 " --------------------[ Vundle ]--------------------
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-"Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'junegunn/fzf.vim'
 Plugin 'vim-airline/vim-airline'
@@ -22,14 +22,12 @@ Plugin 'qpkorr/vim-bufkill'
 Plugin 'vim-scripts/a.vim'
 Plugin 'MattesGroeger/vim-bookmarks'
 Plugin 'majutsushi/tagbar'
-" Plugin 'vim-syntastic/syntastic'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'w0rp/ale'               " Asynchronous Lint Engine
 Plugin 'JamshedVesuna/vim-markdown-preview'
-"Plugin 'Shougo/deoplete.nvim'
 
 " JavaScript plugins
 Plugin 'pangloss/vim-javascript'
@@ -37,8 +35,9 @@ Plugin 'geekjuice/vim-mocha'
 
 " Golang plugins
 Plugin 'fatih/vim-go'
-"Plugin 'nsf/gocode'
-"Plugin 'zchee/deoplete-go'
+
+" Cucumber
+Plugin 'tpope/vim-cucumber'
 call vundle#end()
 filetype plugin indent on
 " --------------------------------------------------
@@ -47,6 +46,7 @@ filetype plugin indent on
 " ------------------[ Generic Options ]------------------
 syntax on
 set background=dark
+set autoindent
 set copyindent          " Make autoindent use the same chars as prev line
 set cursorline          " Highlight current line
 set mouse=a
@@ -84,11 +84,18 @@ set hidden
 set pastetoggle=<F2>
 
 
+" Create a file type for cucumber's *.feature
+augroup filetypedetect
+au! BufReadPre,BufReadPost,BufRead,BufNewFile *.feature setfiletype cucumber
+augroup END
+
+
 " Set appropriate tabs for some file types
 autocmd Filetype javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd Filetype ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd Filetype yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-
+autocmd Filetype cucumber setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+autocmd Filetype python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 
 " Set the theme if the terminal emulator supports 256 colours
 " or if using the GUI version of Vim
@@ -99,6 +106,9 @@ endif
 
 " Limit line length of git commits to 72 cols
 au FileType gitcommit set tw=72
+
+" Limit line length of markdown to 100 cols
+au FileType markdown set tw=100
 
 
 " Folding options
@@ -328,7 +338,7 @@ autocmd FileType go nmap <leader>ge :GoCoverage<CR>
 
 
 " -----[ vim-markdown-preview ]-----
-let vim_markdown_preview_browser = 'Google Chrome'
+let vim_markdown_preview_browser = 'Firefox'
 let vim_markdown_preview_github = 1
 let vim_markdown_preview_hotkey='<C-m>'
 " ----------------------------------
