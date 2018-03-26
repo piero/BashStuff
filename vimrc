@@ -44,7 +44,8 @@ set copyindent          " Make autoindent use the same chars as prev line
 set cursorline          " Highlight current line
 set mouse=a
 set number              " Show line numbers
-set nowrap              " Don't wrap lines
+set wrap                " Wrap lines (disable with 'setnowrap')
+set linebreak           " When wrapping text, consider word boundaries
 set showmatch           " Hilight matching braces/parens/etc.
 set splitbelow
 set splitright
